@@ -1,0 +1,15 @@
+<!-- base.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}My Website{% endblock %}</title>
+    <!-- Đây là nơi để thêm các tệp CSS hoặc các tài nguyên khác -->
+    {% block head %}{% endblock %}
+</head>
+<body>
+    <!-- Đây là nơi để chứa nội dung chính của mỗi trang -->
+    {% block content %}{% endblock %}
+</body>
+</html>

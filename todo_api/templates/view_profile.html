@@ -1,0 +1,45 @@
+<!-- view_profile.html -->
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile Information</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'style_view_profile.css' %}">
+</head>
+<body>
+    <header>
+        <h1>Welcome to ToDo List App of MR KHAXI</h1>
+    </header>
+    <nav>
+        <ul>
+            <li><a href="{% url 'home' %}">HOME</a></li>
+            <li><a href="{% url 'changepassword' %}">CHANGE PASWORD</a></li>
+            <li><a href="{% url 'profile' %}">PROFILE</a></li>
+            <li><a href="{% url 'logout' %}">LOGOUT</a></li>
+            <!-- Your navigation links here -->
+        </ul>
+    </nav>
+    <div class="profile-container">
+        <h2>Profile Information</h2>
+        <div class="profile-field label-value">
+            <label for="username">Username:</label>
+            <p id="username">{{ user_info.username }}</p>
+        </div>
+        <div class="profile-field label-value">
+            <label for="first_name">First Name:</label>
+            <p id="first_name">{{ user_info.first_name }}</p>
+        </div>
+        <div class="profile-field label-value">
+            <label for="last_name">Last Name:</label>
+            <p id="last_name">{{ user_info.last_name }}</p>
+        </div>
+        <div class="profile-field label-value">
+            <label for="email">Email:</label>
+            <p id="email">{{ user_info.email }}</p>
+        </div>
+        <a class="edit-profile" href="{% url 'change_profile' %}">Edit Profile</a>
+    </div>
+</body>
+</html>

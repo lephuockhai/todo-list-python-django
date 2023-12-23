@@ -1,0 +1,68 @@
+<!-- templates/create_list.html -->
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create List</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style_home.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style_create_list.css' %}">
+    <!-- Add your additional CSS styles here if needed -->
+</head>
+<body>
+    <header>
+        <h1>Welcome to ToDo List App of MR KHAXI</h1>
+    </header>
+    <nav>
+        <ul>
+            <li><a href="{% url 'profile' %}">PROFILE</a></li>
+            <li><a href="{% url 'logout' %}">LOGOUT</a></li>
+            <li><a href="{% url 'home' %}">HOME</a></li>
+            <!-- Your navigation links here -->
+        </ul>
+    </nav>
+
+    <nav>
+        <ul>
+            <li><a href="{% url 'assigns-to-list'%}">Assigns For Me</a></li>
+            <li><a href="{% url 'creategroup' %}">Create Group</a></li>
+            <li><a href="{% url 'createtask' %}">Create Task</a></li>
+        </ul>
+    </nav>
+
+    <section id="list-section">
+        <h2>Create List</h2>
+        <form method="post" action="{% url 'createlist' %}" id="list-form">
+            {% csrf_token %}
+            <label for="list-name">List Name:</label>
+            <input type="text" id="list-name" name="combined_name" required>
+
+            <label for="parent-list">Parent List:</label>
+            <select id="parent-list" name="parent_id">
+                <option value="" selected>Select a parent Group</option>
+                {% for parent_list in groups %}
+                    <option value="{{ parent_list.id }}">{{ parent_list.combined_name }}</option>
+                {% endfor %}
+            </select>
+
+            <button type="submit" class="btn">Create List</button>
+        </form>
+    </section>
+
+    <section id="list-view">
+        <h2>List View</h2>
+        <ul id="lists">
+            {% for list in lists %}
+                <li>
+                    {{ list.combined_name }} - Level: {{ list.level }}
+                    <form method="post" action="{% url 'delete-list' list.id %}" class="delete-list-form">
+                        {% csrf_token %}
+                        <button type="submit" class="delete-list-icon">🗑️</button>
+                    </form>
+                </li>
+            {% endfor %}
+        </ul>
+    </section>
+</body>
+</html>

@@ -1,0 +1,61 @@
+<!-- templates/create_list.html -->
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create List</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style_home.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style_create_group.css' %}">
+    <!-- Add your additional CSS styles here if needed -->
+</head>
+<body>
+    <header>
+        <h1>Welcome to ToDo List App of MR KHAXI</h1>
+    </header>
+    <nav>
+        <ul>
+            <li><a href="{% url 'profile' %}">PROFILE</a></li>
+            <li><a href="{% url 'logout' %}">LOGOUT</a></li>
+            <li><a href="{% url 'home' %}">HOME</a></li>
+            <!-- Your navigation links here -->
+        </ul>
+    </nav>
+
+    <nav>
+        <ul>
+            <li><a href="{% url 'assigns-to-list'%}">Assigns For Me</a></li>
+            <li><a href="{% url 'createlist' %}">Create List</a></li>
+            <li><a href="{% url 'createtask' %}">Create Task</a></li>
+        </ul>
+    </nav>
+
+    <section id="list-section">
+        <h2>Create Group</h2>
+        <form method="post" action="{% url 'creategroup' %}" id="list-form">
+            {% csrf_token %}
+            <label for="list-name">Group Name:</label>
+            <input type="text" id="group-name" name="combined_name" required>
+
+            <button type="submit" class="btn">Create Group</button>
+        </form>
+    </section>
+
+    <section id="list-view">
+        <h2>Group View</h2>
+        <ul id="lists">
+            {% for group in groups %}
+                <li>
+                    {{ group.combined_name }}
+                    <form method="post" action="{% url 'delete-group' group.id %}" class="delete-group-form">
+                        {% csrf_token %}
+                        <button type="submit" class="delete-group-icon">🗑️</button>
+                    </form>
+                </li>
+                
+            {% endfor %}
+        </ul>
+    </section>
+</body>
+</html>

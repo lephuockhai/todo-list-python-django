@@ -1,0 +1,54 @@
+<!-- templates/assign.html -->
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Assign User to List</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style_assign.css' %}">
+</head>
+<body>
+    <header>
+        <h1>Welcome to ToDo List App of MR KHAXI</h1>
+    </header>
+    <nav>
+        <ul>
+            <li><a href="{% url 'profile' %}">PROFILE</a></li>
+            <li><a href="{% url 'logout' %}">LOGOUT</a></li>
+            <li><a href="{% url 'home' %}">HOME</a></li>
+            <!-- Your navigation links here -->
+        </ul>
+    </nav>
+
+    <nav>
+        <ul>
+            <li><a href="{% url 'createtask' %}">Create Task</a></li>
+            <li><a href="{% url 'createlist' %}">Create List</a></li>
+            <li><a href="{% url 'creategroup' %}">Create Group</a></li>
+        </ul>
+    </nav>
+
+    <section id="assign-section">
+        <form method="post" action="{% url 'assigns-to-list' %}" id="assign-form">
+            {% csrf_token %}
+            <label for="user-email">User Email:</label>
+            <input type="email" id="user-email" name="email" required>
+
+            <label for="selecting-list">Selecting List:</label>
+                <select id="selecting-list" name="list_id">
+                    <option value="" selected>Select a list</option>
+                    {% for list in lists %}
+                        <option value="{{ list.id }}">{{ list.combined_name }}</option>
+                    {% endfor %}
+                </select>
+
+            <button type="submit" class="btn">Add to List</button>
+        </form>
+
+        {% if message %}
+            <div class="message">{{ message }}</div>
+        {% endif %}
+    </section>
+</body>
+</html>

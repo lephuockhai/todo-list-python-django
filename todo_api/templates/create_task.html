@@ -1,0 +1,85 @@
+    <!-- templates/home.html -->
+    {% load static %}
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Task List</title>
+        <link rel="stylesheet" type="text/css" href="{% static 'css/style_home.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'css/style_create_task.css' %}">
+        <!-- Add your additional CSS styles here if needed -->
+    </head>
+    <body>
+        <header>
+            <h1>Welcome to ToDo List App of MR KHAXI</h1>
+        </header>
+        <nav>
+            <ul>
+                <li><a href="{% url 'profile' %}">PROFILE</a></li>
+                <li><a href="{% url 'logout' %}">LOGOUT</a></li>
+                <li><a href="{% url 'home' %}">HOME</a></li>
+                <!-- Your navigation links here -->
+            </ul>
+        </nav>
+
+        <nav>
+            <ul>
+                <li><a href="{% url 'assigns-to-list'%}">Assigns For Me</a></li>
+                <li><a href="{% url 'creategroup' %}">Create Group</a></li>
+                <li><a href="{% url 'createlist' %}">Create List</a></li>
+            </ul>
+        </nav>
+
+        <section id="task-section">
+            <h2>Create Task</h2>
+            <form method="post" action="{% url 'createtask' %}" id="task-form">
+                <!-- khi dung csrf trong view thi khai bao no o day -->
+                {% csrf_token %}
+                <label for="task-description">Task Description:</label>
+                <input type="text" id="task-description" name="task_describe" required>
+
+                <label for="task-status" id="task-status-label">
+                    <span class="icon">&#10004;</span> Task Status:
+                </label>
+                <input type="checkbox" id="task-status" name="task_status" {% if task.task_status %}checked{% endif %}>
+
+                <label for="task-due-date" id="due-date-label">
+                    <span class="icon">&#128197;</span> Due Date:
+                </label>
+                <input type="date" id="task-due-date" name="due_date">
+
+                <!-- Add the dropdown/select for existing tasks -->
+                <label for="selecting-list">Selecting List:</label>
+                <select id="selecting-list" name="list_id">
+                    <option value="" selected>Select a list</option>
+                    {% for list in lists %}
+                        <option value="{{ list.id }}">{{ list.combined_name }}</option>
+                    {% endfor %}
+                </select>
+
+                <button type="submit" class="btn">Create Task</button>
+            </form>
+        </section>
+
+        <section id="task-list">
+            <h2>Task View</h2>
+            <ul id="tasks">
+                {% for task in tasks %}
+                    <li>
+                        <form method="post" action="{% url 'update-task-status' task.id %}" class="{% if task.task_status == 'Complete' %}completed-task{% endif %}">
+                            {% csrf_token %}
+                            <input type="hidden" name="task_id" value="{{ task.id }}">
+                            <button type="submit" class="complete-task-checkbox" {% if task.task_status == 'Complete' %}disabled{% endif %}></button>
+                        </form>
+                        {{ task.task_describe }} - Status: {{ task.task_status }} - Due Date: {{ task.due_date }}
+                        <form method="post" action="{% url 'delete-task' task.id %}" class="delete-task-form">
+                            {% csrf_token %}
+                            <button type="submit" class="delete-task-icon">🗑️</button>
+                        </form>
+                    </li>
+                {% endfor %}
+            </ul>
+        </section>
+    </body>
+    </html>

@@ -1,0 +1,62 @@
+<!-- templates/home.html -->
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>  
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Page</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style_home.css' %}">
+    <style>
+        body {
+            position: relative;
+        }
+
+        .button-container {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+        }
+
+        .button {
+            display: inline-block;
+            padding: 10px 20px;
+            margin: 10px;
+            background-color: #3498db;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        .button:hover {
+            background-color: #2980b9;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Welcome to ToDo List App of MR KHAXI</h1>
+    </header>
+    <nav>
+        <ul>
+            <!-- ... Các liên kết khác ... -->
+            <li><a href="{% url 'changepassword' %}">CHANGE PASWORD</a></li>
+            <li><a href="{% url 'profile' %}">PROFILE</a></li>
+            <li><a href="{% url 'logout' %}">LOGOUT</a></li>
+        </ul>
+    </nav>
+    
+    <!-- Thẻ div chứa các nút -->
+    <div class="button-container">
+        <a href="{% url 'createtask' %}" class="button">Create Task</a>
+        <a href="{% url 'createlist' %}" class="button">Create List</a>
+        <a href="{% url 'creategroup' %}" class="button">Create Group</a>
+    </div>
+
+    <!-- Ảnh GIF -->
+    <img src="https://64.media.tumblr.com/db7c88e815018772d0320b0bdd413fbb/tumblr_p8tymcDzQN1qciqqno2_1280.gif" alt="Placeholder Image">
+</body>
+</html>

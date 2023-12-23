@@ -1,0 +1,60 @@
+<!-- change_profile.html -->
+{% load static %}
+
+{% block content %}
+<!-- templates/home.html -->
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Change Profile</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style_change_profile.css' %}">
+    <!-- Add your additional CSS styles here if needed -->
+</head>
+<body>
+  <header>
+    <h1>Welcome to ToDo List App of MR KHAXI</h1>
+</header> 
+<nav>
+    <ul>
+        <li><a href="{% url 'home' %}">HOME</a></li>
+        <li><a href="{% url 'changepassword' %}">CHANGE PASWORD</a></li>
+        <li><a href="{% url 'profile' %}">PROFILE</a></li>
+        <li><a href="{% url 'logout' %}">LOGOUT</a></li>
+        <!-- Your navigation links here -->
+    </ul>
+</nav>
+
+  <div class="container mt-5">
+    
+    <h2>Edit Your Profile</h2>
+    <form method="post" action="{% url 'change_profile' %}">
+      {% csrf_token %}
+      {{ form.non_field_errors }}
+      <div class="form-group">
+        {{ form.username.label_tag }}
+        {{ form.username }}
+        <small class="form-text text-muted">Your username</small>
+      </div>
+      <div class="form-group">
+        {{ form.first_name.label_tag }}
+        {{ form.first_name }}
+        <small class="form-text text-muted">Your first_name</small>
+      </div>
+      <div class="form-group">
+        {{ form.last_name.label_tag }}
+        {{ form.last_name }}
+        <small class="form-text text-muted">Your last_name</small>
+      </div>
+      <div class="form-group">
+        {{ form.email.label_tag }}
+        {{ form.email }}
+        <small class="form-text text-muted">Your email</small>
+      </div>
+      <button type="submit" class="btn btn-primary">Save Changes</button>
+    </form>
+    
+  </div>
+{% endblock %}
