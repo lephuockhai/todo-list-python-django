@@ -40,3 +40,14 @@ class AssignsForm(forms.ModelForm):
     class Meta:
         model= models.AssignInfomation
         fields= ['list_id']
+
+class AssignForTaskForm(forms.ModelForm):
+    assigned_user_id= forms.IntegerField(required=True)
+    class Meta:
+        model= models.TaskInfomation
+        fields= ['assigned_user_id']
+
+class AssignUserForm(forms.Form):
+    task_id = forms.IntegerField(widget=forms.HiddenInput())
+    user_email = forms.EmailField(label='User Email')
+    

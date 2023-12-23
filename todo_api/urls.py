@@ -18,4 +18,5 @@ urlpatterns = [
     path('assigns-to-list/', views.assigns_to_list, name='assigns-to-list'),
     path('delete-list/<int:list_id>/', views.delete_list, name='delete-list'),
     path('delete-group/<int:group_id>/', views.delete_group, name='delete-group'),
+    path('assign_user_to_task', views.assigns_to_task, name='assign_user_to_task'),
 ]

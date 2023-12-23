@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <div class="container">
+    <h1>Your Task List: {{ your_list.name }}</h1>
+
+    <form method="post" action="{% url 'assign_user_to_task' your_list.id %}" id="assign-form">
+      {% csrf_token %}
+      {{ form.non_field_errors }}
+      <div class="form-group">
+        {{ form.task_id.label_tag }}
+        {{ form.task_id }}
+        <small class="form-text text-muted">Select a task to assign</small>
+      </div>
+      <div class="form-group">
+        {{ form.user_email.label_tag }}
+        {{ form.user_email }}
+        <small class="form-text text-muted">Enter user email</small>
+      </div>
+      <button type="submit" class="btn btn-primary">Assign User</button>
+    </form>
+
+    <h2>Tasks in this list:</h2>
+    <ul>
+      {% for task in tasks %}
+        <li>
+          <span>{{ task.task_describe }}</span>
+          {% if task.assigned_user_id %}
+            <span class="assigned-user">Assigned to: {{ task.assigned_user_id.email }}</span>
+          {% endif %}
+        </li>
+      {% endfor %}
+    </ul>
+  </div>
+{% endblock %}

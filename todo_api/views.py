@@ -247,3 +247,28 @@ def assigns_to_list(request):
     else:
         form = forms.AssignsForm(request.user)
     return render(request, 'assigns.html', {'form': form, 'lists': lists})
+
+def assigns_to_task(request, list_id):
+    try:
+        list_data = models.GroupInfomation.objects.get(id= list_id, type= 'list', user_id= request.user.id)
+    except models.GroupInfomation.DoesNotExist:
+        messages.error(request, 'List not found.')
+        return redirect('your_redirect_view_name')
+    
+    tasks = models.TaskInformation.objects.filter(list_id=list_data.id)
+    form = form.AssignUserForm()
+
+    if request.method == 'POST':
+        form = forms.AssignUserForm(request.POST)
+        if form.is_valid():
+            task_id = form.cleaned_data['task_id']
+            user_email = form.cleaned_data['user_email']
+            try:
+                user = User.objects.get(email=user_email)
+                models.AssignInfomation.objects.create(user_id=request.user.id, task_id=task_id, join_user_id=user.id)
+                messages.success(request, f'User {user.email} assigned to the task successfully.')
+            except User.DoesNotExist:
+                messages.error(request, 'User with this email does not exist.')
+        else:
+            messages.error(request, 'Invalid form submission.')
+    return render(request, 'task_list.html', {'your_list': list_data, 'tasks': tasks, 'form': form})
