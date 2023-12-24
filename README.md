@@ -1,33 +1,33 @@
-# todo-list-python-django
+# Introduce about todo-list-python-django
+This project is so that I and everyone else can figure out how to create an API using the Django library. In this project, I have connected to the Postgres database to store data, and so that users can For easier access, there are also display interfaces for users to operate the system. Some features of this Todo List application are:
+- Register an account;
+- Log in to your account;
+- Edit user information;
+- Create Group, List, task;
+- Assign tasks to users;
+- Change new password;
+- Log out of your account;
+- Delete existing Groups, Lists, and tasks in the Database.
 
-# My Awesome Project
+### Prerequisites
 
-[![GitHub stars](https://img.shields.io/github/stars/your-username/your-repository.svg?style=for-the-badge)](https://github.com/your-username/your-repository/stargazers)
-[![GitHub forks](https://img.shields.io/github/forks/your-username/your-repository.svg?style=for-the-badge)](https://github.com/your-username/your-repository/network)
-[![GitHub issues](https://img.shields.io/github/issues/your-username/your-repository.svg?style=for-the-badge)](https://github.com/your-username/your-repository/issues)
-[![GitHub license](https://img.shields.io/github/license/your-username/your-repository.svg?style=for-the-badge)](https://github.com/your-username/your-repository/blob/main/LICENSE)
+Make sure you have the following tools installed on your system:
 
-Welcome to my awesome project! This project does amazing things and is built with love. Here are some key features:
+- [Python](https://www.python.org/) (version 3.9.2rc1 64bit)
+- [Pip](https://pip.pypa.io/en/stable/)
+- [Rest_framework](https://pypi.org/project/djangorestframework/)
+- [Django] (version 4.6)
 
-## Features
 
-- 🚀 Fast and efficient
-- 🌈 Beautiful and responsive design
-- 📦 Easy to install and use
-- ⚙️ Customizable settings
-- 🤖 AI-powered magic
-
-## Installation
-
-To install this project, follow these steps:
-
-1. Clone the repository: `git clone https://github.com/your-username/your-repository.git`
-2. Navigate to the project folder: `cd your-repository`
-3. Install dependencies: `npm install`
-
-## Usage
-
-Simply run the project using the following command:
+### Clone the Repository
 
 ```bash
-npm start
+git clone https://github.com/lephuockhai/todo-list-python-django.git
+cd todo-list-app
+python3 -m venv venv
+source venv/bin/activate
+
+### Usage
+```bash
+python manage.py runserver
+
